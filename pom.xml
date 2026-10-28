@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.montaki</groupId>
-    <artifactId>bank-accout-service</artifactId>
+    <artifactId>bank-account-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bank-accout-service</name>
     <description>bank-accout-service</description>
