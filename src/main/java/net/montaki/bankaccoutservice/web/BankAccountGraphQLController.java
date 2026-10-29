@@ -4,7 +4,9 @@ package net.montaki.bankaccoutservice.web;
 import net.montaki.bankaccoutservice.dto.BankAccountRequestDTO;
 import net.montaki.bankaccoutservice.dto.BankAccountResponseDTO;
 import net.montaki.bankaccoutservice.entities.BankAccount;
+import net.montaki.bankaccoutservice.entities.Customer;
 import net.montaki.bankaccoutservice.repositories.BankAccountRepository;
+import net.montaki.bankaccoutservice.repositories.CustomerRepository;
 import net.montaki.bankaccoutservice.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -28,6 +30,9 @@ public class BankAccountGraphQLController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
 
     @QueryMapping
     public BankAccount bankAccountById(@Argument String id) {
@@ -49,6 +54,11 @@ public class BankAccountGraphQLController {
     public Boolean deleteAccount(@Argument String id) {
         bankAccountRepository.deleteById(id);
         return true;
+    }
+
+    @QueryMapping
+    public List<Customer> customers() {
+        return customerRepository.findAll();
     }
 
 }
