@@ -6,4 +6,5 @@ import net.montaki.bankaccoutservice.dto.BankAccountResponseDTO;
 public interface AccountService {
     BankAccountResponseDTO addAccount(BankAccountRequestDTO bankAccountDTO);
 
+    BankAccountResponseDTO updateAccount(String id, BankAccountRequestDTO bankAccountDTO);
 }
