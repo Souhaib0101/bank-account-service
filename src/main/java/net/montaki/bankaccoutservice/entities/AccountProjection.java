@@ -10,3 +10,5 @@ public interface AccountProjection {
     public AccountType getType();
     public String getBalance();
 }
+
+
