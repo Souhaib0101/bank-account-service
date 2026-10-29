@@ -1,8 +1,12 @@
 package net.montaki.bankaccoutservice.web;
 
 
+import net.montaki.bankaccoutservice.dto.BankAccountRequestDTO;
+import net.montaki.bankaccoutservice.dto.BankAccountResponseDTO;
 import net.montaki.bankaccoutservice.entities.BankAccount;
+import net.montaki.bankaccoutservice.mappers.AccountMapper;
 import net.montaki.bankaccoutservice.repositories.BankAccountRepository;
+import net.montaki.bankaccoutservice.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -14,9 +18,14 @@ import java.util.UUID;
 public class AccountRestController {
 
     private BankAccountRepository bankAccountRepository;
+    private AccountService accountService;
 
-    public AccountRestController(BankAccountRepository bankAccountRepository) {
+    private AccountMapper accountMapper;
+
+    public AccountRestController(BankAccountRepository bankAccountRepository, AccountService accountService, AccountMapper accountMapper) {
         this.bankAccountRepository = bankAccountRepository;
+        this.accountService = accountService;
+        this.accountMapper = accountMapper;
     }
 
     @GetMapping("/bankAccounts")
@@ -30,9 +39,8 @@ public class AccountRestController {
     }
 
     @PostMapping("/bankAccounts")
-    public BankAccount save(@RequestBody BankAccount bankAccount) {
-        if(bankAccount.getId()==null) bankAccount.setId(UUID.randomUUID().toString());
-        return bankAccountRepository.save(bankAccount);
+    public BankAccountResponseDTO save(@RequestBody BankAccountRequestDTO requestDTO) {
+        return accountService.addAccount(requestDTO);
     }
 
     @PutMapping("/bankAccounts/{id}")
